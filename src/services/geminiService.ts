@@ -20,5 +20,10 @@ Please provide a polished letter with a proper greeting, body, and closing.`;
     },
   });
 
-  return response.text || "Failed to generate letter.";
+  if (!response.text) {
+    console.error("Gemini API response:", response);
+    throw new Error("No text returned from Gemini API");
+  }
+
+  return response.text;
 }
